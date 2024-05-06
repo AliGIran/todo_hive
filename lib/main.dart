@@ -36,9 +36,17 @@ class TodoHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
-        title: TextField(
-          controller: todoTextEditingController,
-          decoration: const InputDecoration(),
+        title: Directionality(
+          textDirection: TextDirection.rtl,
+          child: TextField(
+            onSubmitted: (value) {
+              _addNewTodo();
+            },
+            controller: todoTextEditingController,
+            decoration: const InputDecoration(
+                labelText: "بهم بگو چیکار کنیم؟",
+                floatingLabelAlignment: FloatingLabelAlignment.center),
+          ),
         ),
       ),
 
@@ -92,6 +100,7 @@ class TodoHomePage extends StatelessWidget {
           onPressed: () {
             _addNewTodo();
           }),
+
     );
   }
 
