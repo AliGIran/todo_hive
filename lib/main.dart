@@ -27,7 +27,8 @@ void main() async {
 class TodoHomePage extends StatelessWidget {
   TodoHomePage({super.key});
 
-  final TextEditingController todoTextEditingController = TextEditingController();
+  final TextEditingController todoTextEditingController =
+      TextEditingController();
 
   final Random random = Random();
 
@@ -37,7 +38,9 @@ class TodoHomePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Hive.box<TodoListHive>(todoBoxName).clear();
+              _deleteBox(context);
+
+              // Hive.box<TodoListHive>(todoBoxName).clear();
             },
             icon: const Icon(Icons.cleaning_services_rounded)),
         forceMaterialTransparency: true,
@@ -113,11 +116,8 @@ class TodoHomePage extends StatelessWidget {
   _addNewTodo() {
     String newTodo = todoTextEditingController.text;
 
-    final todoColor = Color.fromRGBO(
-        random.nextInt(130) + 120,
-        random.nextInt(130) + 120,
-        random.nextInt(130) + 120,
-        1);
+    final todoColor = Color.fromRGBO(random.nextInt(130) + 120,
+        random.nextInt(130) + 120, random.nextInt(130) + 120, 1);
     final int color = todoColor.value.toInt();
     // Color color = const Color.fromRGBO(25, 250, 250, 1);
     TodoListHive todoListHive = TodoListHive(newTodo, false, color);
@@ -161,4 +161,33 @@ class TodoHomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _deleteBox(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          title: const Text("تمام موارد پاک شود؟"),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            FilledButton(
+                onPressed: () {
+                  Hive.box<TodoListHive>(todoBoxName).clear();
+
+                  Navigator.pop(context);
+                },
+                child: const Text("پاکشون کن")),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("نه، برگرد"))
+          ],
+        ),
+      );
+    },
+  );
 }
