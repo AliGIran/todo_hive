@@ -18,6 +18,7 @@ void main() async {
   await Hive.openBox<TodoListHive>(todoBoxName);
 
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green)),
     home: TodoHomePage(),
