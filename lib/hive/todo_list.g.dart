@@ -19,17 +19,20 @@ class TodoListHiveAdapter extends TypeAdapter<TodoListHive> {
     return TodoListHive(
       fields[0] as String,
       fields[1] as bool,
+      fields[2] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, TodoListHive obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.todoTitle)
       ..writeByte(1)
-      ..write(obj.isChecked);
+      ..write(obj.isChecked)
+      ..writeByte(2)
+      ..write(obj.colorValue);
   }
 
   @override

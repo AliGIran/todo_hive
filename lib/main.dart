@@ -27,14 +27,19 @@ void main() async {
 class TodoHomePage extends StatelessWidget {
   TodoHomePage({super.key});
 
-  TextEditingController todoTextEditingController = TextEditingController();
+  final TextEditingController todoTextEditingController = TextEditingController();
 
-  Random random = Random();
+  final Random random = Random();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Hive.box<TodoListHive>(todoBoxName).clear();
+            },
+            icon: const Icon(Icons.cleaning_services_rounded)),
         forceMaterialTransparency: true,
         title: Directionality(
           textDirection: TextDirection.rtl,
@@ -70,11 +75,12 @@ class TodoHomePage extends StatelessWidget {
                         _deleteTodo(context, index);
                       },
                       child: Card(
-                        color: Color.fromRGBO(
-                            random.nextInt(130) + 120,
-                            random.nextInt(130) + 120,
-                            random.nextInt(130) + 120,
-                            1),
+                        // color: Color.fromRGBO(
+                        //     random.nextInt(130) + 120,
+                        //     random.nextInt(130) + 120,
+                        //     random.nextInt(130) + 120,
+                        //     1),
+                        color: Color(todo.colorValue),
                         child: CheckboxListTile(
                           title: Text(todo.todoTitle),
                           value: todo.isChecked,
@@ -100,7 +106,6 @@ class TodoHomePage extends StatelessWidget {
           onPressed: () {
             _addNewTodo();
           }),
-
     );
   }
 
@@ -108,7 +113,14 @@ class TodoHomePage extends StatelessWidget {
   _addNewTodo() {
     String newTodo = todoTextEditingController.text;
 
-    TodoListHive todoListHive = TodoListHive(newTodo, false);
+    final todoColor = Color.fromRGBO(
+        random.nextInt(130) + 120,
+        random.nextInt(130) + 120,
+        random.nextInt(130) + 120,
+        1);
+    final int color = todoColor.value.toInt();
+    // Color color = const Color.fromRGBO(25, 250, 250, 1);
+    TodoListHive todoListHive = TodoListHive(newTodo, false, color);
 
     final box = Hive.box<TodoListHive>(todoBoxName);
 

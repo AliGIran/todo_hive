@@ -1,3 +1,5 @@
+
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 part 'todo_list.g.dart';
@@ -10,5 +12,10 @@ class TodoListHive {
   @HiveField(1)
   bool isChecked;
 
-  TodoListHive(this.todoTitle, this.isChecked);
+   @HiveField(2)
+   int colorValue;
+
+  TodoListHive(this.todoTitle, this.isChecked, this.colorValue);
+
+// TodoListHive(this.todoTitle, this.isChecked);
 }
