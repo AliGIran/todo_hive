@@ -7,7 +7,7 @@ import '../../data/models/main_todo_hive/main_todo_hive.dart';
 import '../widgets/home_page_widgets.dart';
 
 // Add new mainTodo to the box
-addNewTodo(String newTodo) {
+addNewTodo(String newTodo, MainTodoIcon? todoIcon) {
   final todoColor = Color.fromRGBO(random.nextInt(200) + 56,
       random.nextInt(200) + 56, random.nextInt(200) + 56, 1);
 
@@ -15,7 +15,8 @@ addNewTodo(String newTodo) {
 
   final box = Hive.box<MainTodoHive>(HiveConstants.mainTodoHive);
 
-  final todoListHive = MainTodoHive(newTodo, false, color, []);
+  final todoListHive =
+      MainTodoHive(newTodo, false, color, [], todoIcon!);
 
   box.add(todoListHive);
 }
@@ -73,4 +74,25 @@ void homePageMainTodoOnChange(bool? value, MainTodoHive todo, int index) {
   todo.isChecked = value!;
 
   Hive.box<MainTodoHive>(HiveConstants.mainTodoHive).putAt(index, todo);
+}
+
+// Turn hive enum to icon to show in UI
+Icon getMainTodoIcon(MainTodoIcon icon) {
+  switch (icon) {
+    case MainTodoIcon.home:
+      return const Icon(Icons.home);
+    case MainTodoIcon.reading:
+      return const Icon(Icons.local_library);
+    case MainTodoIcon.sport:
+      return const Icon(Icons.sports_volleyball);
+    case MainTodoIcon.work:
+      return const Icon(Icons.work);
+    case MainTodoIcon.family:
+      return const Icon((Icons.family_restroom));
+    case MainTodoIcon.kitchen:
+      return const Icon(Icons.soup_kitchen);
+
+    default:
+      return const Icon(Icons.error);
+  }
 }

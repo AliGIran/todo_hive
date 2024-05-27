@@ -8,6 +8,7 @@ import 'package:todo_hive/todo/presentation/pages/home_page.dart';
 
 import 'todo/data/models/main_todo_hive/main_todo_hive.dart';
 import 'todo/presentation/pages/detail_page.dart';
+import 'todo/presentation/pages/new_main_todo_page.dart';
 
 // the constant defined here not in a separated file because we only have one of them;
 const String todoBoxName = "todoBoxName";
@@ -19,6 +20,7 @@ void main() async {
 
   Hive.registerAdapter(MainTodoHiveAdapter());
   Hive.registerAdapter(SubTodoHiveAdapter());
+  Hive.registerAdapter(MainTodoIconAdapter());
 
   // Hive
   //   ..registerAdapter(MainTodoHiveAdapter())
@@ -48,13 +50,11 @@ void main() async {
   //   ..openBox<SubTodoHive>(HiveConstants.subTodoHive);
 
   runApp(MaterialApp(
-
-
-
     initialRoute: "/",
     routes: {
       "/todoHomePage": (context) => const TodoHomePage(),
       "/todoDetailPage": (context) => TodoDetailPage(),
+      "/newMainTodoPage": (context) => const NewMainTodoPage()
     },
     debugShowCheckedModeBanner: false,
     theme: ThemeData.from(

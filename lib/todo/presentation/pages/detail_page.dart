@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_hive/todo/data/models/main_todo_hive/main_todo_hive.dart';
+import 'package:todo_hive/todo/presentation/interactions/home_page_interactions.dart';
 import 'package:todo_hive/todo/variables/variables.dart';
 
 import '../../../core/constants/hive_constants.dart';
@@ -23,8 +24,15 @@ class TodoDetailPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         forceMaterialTransparency: true,
-        title: detailPageAppBarTitle(todo),
-        leading: backToHomePageIconButton(context),
+        title: Column(children: [
+          detailPageAppBarTitle(todo),
+          getMainTodoIcon(todo.icon)
+        ]),
+        leading: BackButton(
+          onPressed: () => Navigator.pop(context),
+        )
+        // backToHomePageIconButton(context)
+        ,
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
