@@ -12,7 +12,8 @@ class TodoHomePage extends StatelessWidget {
         leading: const HomePageDeleteBoxIconButton(),
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.list))],
         forceMaterialTransparency: true,
-        title: const HomePageTextField(),
+        title: const Text("کارهای امروز"),
+        centerTitle: true,
       ),
 
        body:

@@ -9,30 +9,30 @@ import '../../../core/constants/hive_constants.dart';
 import '../../data/models/main_todo_hive/main_todo_hive.dart';
 import '../interactions/home_page_interactions.dart';
 
-class HomePageTextField extends StatelessWidget {
-  const HomePageTextField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: TextField(
-          onSubmitted: (value) {
-            addNewTodo(todoTextEditingController.text,mainTodoIcon);
-            todoTextEditingController.clear();
-          },
-          controller: todoTextEditingController,
-          decoration: const InputDecoration(
-            labelText: "بهم بگو چیکار کنیم؟",
-            floatingLabelAlignment: FloatingLabelAlignment.center,
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class HomePageTextField extends StatelessWidget {
+//   const HomePageTextField({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: EdgeInsets.all(10),
+//       child: Directionality(
+//         textDirection: TextDirection.rtl,
+//         child: TextField(
+//           onSubmitted: (value) {
+//             addNewTodo(todoTextEditingController.text,mainTodoIcon);
+//             todoTextEditingController.clear();
+//           },
+//           controller: todoTextEditingController,
+//           decoration: const InputDecoration(
+//             labelText: "بهم بگو چیکار کنیم؟",
+//             floatingLabelAlignment: FloatingLabelAlignment.center,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // this icon button let the user to clear the whole list
 class HomePageDeleteBoxIconButton extends StatelessWidget {
