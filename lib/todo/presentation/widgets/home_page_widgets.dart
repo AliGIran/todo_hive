@@ -63,8 +63,6 @@ class GotoNewMainTodoPage extends StatelessWidget {
 
           Navigator.pushNamed(context, "/newMainTodoPage");
           mainTodoIcon = MainTodoIcon.home;
-
-
         });
   }
 }
@@ -110,8 +108,6 @@ class MainTodoGridView extends StatelessWidget {
               if (index < box.length) {
                 final todo = todos[index];
 
-
-
                 return GestureDetector(
                   onLongPress: () => deleteTodo(context, index),
                   onDoubleTap: () {
@@ -122,10 +118,16 @@ class MainTodoGridView extends StatelessWidget {
                   child: Card(
                       color: Color(todo.todoColorValue),
                       child: Stack(
+
                         children: [
-                          Center(child: getMainTodoIcon(todo.icon)),
-                          Center(
+                          Container(
+                            alignment: Alignment.topCenter,
+                              padding: const EdgeInsets.only(top: 10),
+                              child: getMainTodoIcon(todo.icon)),
+                          Container(
+                            alignment: Alignment.center,
                             child: CheckboxListTile(
+
                               title: Text(
                                 todo.todoTitle,
                                 style: TextStyle(
@@ -141,12 +143,12 @@ class MainTodoGridView extends StatelessWidget {
                               subtitle: todo.subTodo.isNotEmpty
                                   ? Text(
                                       todo.subTodo
-                                          .map(
-                                              (subTodo) => subTodo.subTodoTitle)
+                                          .map((subTodo) => subTodo.subTodoTitle)
                                           .join(" - "),
                                       maxLines: 3,
                                     )
-                                  : const Text(""),
+                                  : null,
+
                               value: todo.isChecked,
 
                               onChanged: (value) {

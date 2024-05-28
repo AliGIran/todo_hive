@@ -5,6 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:todo_hive/core/constants/hive_constants.dart';
 import 'package:todo_hive/todo/data/models/sub_todo_hive/sub_todo_hive.dart';
 import 'package:todo_hive/todo/presentation/pages/home_page.dart';
+import 'package:todo_hive/todo/variables/variables.dart';
 
 import 'todo/data/models/main_todo_hive/main_todo_hive.dart';
 import 'todo/presentation/pages/detail_page.dart';
@@ -57,8 +58,9 @@ void main() async {
       "/newMainTodoPage": (context) => const NewMainTodoPage()
     },
     debugShowCheckedModeBanner: false,
-    theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green)),
+    theme:  ThemeData.from(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green))
+        ,
     home: const TodoHomePage(),
   ));
 }
