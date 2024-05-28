@@ -19,7 +19,7 @@ class NewMainTodoPage extends StatelessWidget {
       ),
 
 
-      body: Column(
+      body: const Column(
         children: [
           MainTodoTitleTextField(),
           MainTodoIconsDropDownButton()

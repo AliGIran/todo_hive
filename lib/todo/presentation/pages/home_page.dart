@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_hive/todo/variables/variables.dart';
 
 import '../widgets/home_page_widgets.dart';
 
