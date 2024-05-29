@@ -8,6 +8,7 @@ import 'package:todo_hive/todo/variables/variables.dart';
 import '../../../core/constants/hive_constants.dart';
 import '../../data/models/main_todo_hive/main_todo_hive.dart';
 import '../interactions/home_page_interactions.dart';
+import '../manager/home_page_provider.dart';
 
 // class HomePageTextField extends StatelessWidget {
 //   const HomePageTextField({super.key});
@@ -118,16 +119,14 @@ class MainTodoGridView extends StatelessWidget {
                   child: Card(
                       color: Color(todo.todoColorValue),
                       child: Stack(
-
                         children: [
                           Container(
-                            alignment: Alignment.topCenter,
+                              alignment: Alignment.topCenter,
                               padding: const EdgeInsets.only(top: 10),
                               child: getMainTodoIcon(todo.icon)),
                           Container(
                             alignment: Alignment.center,
                             child: CheckboxListTile(
-
                               title: Text(
                                 todo.todoTitle,
                                 style: TextStyle(
@@ -143,7 +142,8 @@ class MainTodoGridView extends StatelessWidget {
                               subtitle: todo.subTodo.isNotEmpty
                                   ? Text(
                                       todo.subTodo
-                                          .map((subTodo) => subTodo.subTodoTitle)
+                                          .map(
+                                              (subTodo) => subTodo.subTodoTitle)
                                           .join(" - "),
                                       maxLines: 3,
                                     )
@@ -237,5 +237,20 @@ class MainTodoListView extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class HomePageRender extends StatelessWidget {
+  const HomePageRender({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    if (HomePageProvider().homePageGridView) {
+      return const MainTodoGridView();
+    } else {
+      return const MainTodoListView();
+    }
+
+
   }
 }

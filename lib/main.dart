@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_hive/core/constants/hive_constants.dart';
 import 'package:todo_hive/todo/data/models/sub_todo_hive/sub_todo_hive.dart';
+import 'package:todo_hive/todo/presentation/manager/home_page_provider.dart';
 import 'package:todo_hive/todo/presentation/pages/home_page.dart';
 
 import 'todo/data/models/main_todo_hive/main_todo_hive.dart';
@@ -49,7 +51,9 @@ void main() async {
   //   ..openBox<MainTodoHive>(HiveConstants.mainTodoHive)
   //   ..openBox<SubTodoHive>(HiveConstants.subTodoHive);
 
-  runApp(MaterialApp(
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => HomePageProvider(),)
+  ],child: MaterialApp(
     initialRoute: "/",
     routes: {
       "/todoHomePage": (context) => const TodoHomePage(),
@@ -58,10 +62,10 @@ void main() async {
     },
     debugShowCheckedModeBanner: false,
     theme:  ThemeData.from(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green))
-        ,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green))
+    ,
     home: const TodoHomePage(),
-  ));
+  )),);
 }
 
 // class TodoHomePage extends StatelessWidget {
